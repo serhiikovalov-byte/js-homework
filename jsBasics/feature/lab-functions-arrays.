@@ -1,0 +1,66 @@
+// Задание 1. Создание массива
+const grades = [10, 8, 12, 7, 9, 11];
+
+console.log("Оценки студента в цикле:");
+for (let i = 0; i < grades.length; i++) {
+    console.log(grades[i]);
+}
+console.log("Общее количество оценок:", grades.length);
+
+
+// Задание 2. Функция подсчета среднего балла
+function calculateAverage(gradesArray) {
+    let sum = 0;
+    for (let i = 0; i < gradesArray.length; i++) {
+        sum += gradesArray[i];
+    }
+    return sum / gradesArray.length;
+}
+
+
+// Задание 3. Функция поиска наивысшей оценки
+function findMaxGrade(gradesArray) {
+    let max = gradesArray[0];
+    for (let i = 1; i < gradesArray.length; i++) {
+        if (gradesArray[i] > max) {
+            max = gradesArray[i];
+        }
+    }
+    return max;
+}
+
+
+// Задание 4. Функция подсчета высоких оценок (>= 10)
+function countHighGrades(gradesArray) {
+    let count = 0;
+    for (let i = 0; i < gradesArray.length; i++) {
+        if (gradesArray[i] >= 10) {
+            count++;
+        }
+    }
+    return count;
+}
+
+
+// Задание 5. Вывод общего результата
+function showResults(gradesArray) {
+    console.log("===== АНАЛИЗ ОЦЕНОК =====");
+    
+    let gradesString = "";
+    for (let i = 0; i < gradesArray.length; i++) {
+        gradesString += gradesArray[i];
+        if (i < gradesArray.length - 1) {
+            gradesString += ", ";
+        }
+    }
+    
+    console.log("Оценки студента: " + gradesString);
+    console.log("");
+    console.log("Количество оценок:", gradesArray.length);
+    console.log("Средний балл:", calculateAverage(gradesArray));
+    console.log("Наивысшая оценка:", findMaxGrade(gradesArray));
+    console.log("Количество высоких оценок:", countHighGrades(gradesArray));
+    console.log("=========================");
+}
+
+showResults(grades);
