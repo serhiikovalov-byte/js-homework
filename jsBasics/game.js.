@@ -1,0 +1,77 @@
+// 1. Создаем объект player (игрок)
+const player = {
+    name: "Герой",
+    health: 100,
+    attackPower: 20
+};
+
+// 2. Создаем объект monster (монстр)
+const monster = {
+    name: "Гоблин",
+    health: 80,
+    attackPower: 15
+};
+
+// 3. Создаем массив inventory с предметами игрока
+const inventory = ["меч", "щит", "зелье здоровья"];
+
+// 4. Реализуем универсальную функцию атаки
+function attack(attacker, defender) {
+    defender.health -= attacker.attackPower;
+    // Защита от ухода здоровья в минус
+    if (defender.health < 0) {
+        defender.health = 0;
+    }
+}
+
+// 5. Реализуем функцию monsterAttack (атака монстра)
+function monsterAttack() {
+    attack(monster, player);
+}
+
+// 6. Реализуем функцию showStatus для вывода текущего состояния
+function showStatus() {
+    console.log(`Гравець: ${player.name}`);
+    console.log(`Здоров'я: ${player.health} HP\n`);
+    console.log(`Монстр: ${monster.name}`);
+    console.log(`Здоров'я: ${monster.health} HP`);
+}
+
+// Начало игры
+console.log("Гра «Битва з монстром»\n");
+showStatus();
+
+let round = 1;
+
+// 7. Организуем битву с помощью цикла while
+while (player.health > 0 && monster.health > 0) {
+    console.log(`\n=== Раунд ${round} ===`);
+    
+    // Ход игрока
+    console.log(`${player.name} атакує монстра!`);
+    attack(player, monster);
+    console.log(`Здоров'я монстра: ${monster.health} HP`);
+
+    // Проверяем, жив ли монстр перед его контратакой
+    if (monster.health <= 0) {
+        break;
+    }
+
+    // Ход монстра
+    console.log(`\n${monster.name} атакує героя!`);
+    monsterAttack();
+    console.log(`Здоров'я героя: ${player.health} HP`);
+
+    round++;
+}
+
+console.log("\n-------------------");
+
+// 8. Вывод сообщения о победе или поражении
+if (player.health > 0) {
+    console.log("🏆 Перемога!");
+    console.log(`${player.name} переміг монстра!`);
+} else {
+    console.log("💀 Поразка!");
+    console.log(`${monster.name} переміг героя... Спробуй ще раз!`);
+}
